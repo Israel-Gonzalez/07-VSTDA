@@ -1,0 +1,49 @@
+<!DOCTYPE html>
+<html lang="en" ng-app="myApp">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Very Simple Todo App</title>
+    <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/angularjs/1.4.5/angular.min.js"></script>
+    <script type="text/javascript" src="app.js"></script>
+    <!-- Latest compiled and minified JavaScript -->
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/js/bootstrap.min.js" integrity="sha384-0mSbJDEHialfmuBBQP6A4Qrprq5OVfW37PRR3j5ELqxss1yVqOtnepnHVP9aJ7xS" crossorigin="anonymous"></script>
+    <!-- Latest compiled and minified CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.6/css/bootstrap.min.css" integrity="sha384-1q8mTJOASx8j1Au+a5WDVnPi2lkFfwwEAa8hDDdjZlpLegxhjVME1fgjWPGmkzs7" crossorigin="anonymous">
+</head>
+
+<body ng-controller="todoCtrl">
+    <div class="col-md-6">
+        <div class="panel panel-info">
+            <div class="panel-heading">Add Todo Item</div>
+            <div class="panel-body">
+                <label for="task">Text</label>
+                <input class="form-control" type="text" placeholder="Add new todo.." ng-model="newTodo">
+                <label>Priority</label>
+                <select class="form-control" ng-model="color">
+                    <option value="3">High priority item</option>
+                    <option value="2">Meidum priority item</option>
+                    <option value="1">Low priority item</option>
+                </select>
+            </div>
+            <div>
+                <button type="submit" class="btn btn-primary" ng-click="addTodo()">Add Todo</button>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-6">
+        <button type="button" class="btn btn-primary" ng-click="orderMethod = '-priority'">Order by highest priority</button>
+        <button type="button" class="btn btn-primary" ng-click="orderMethod = 'priority'">Order by lowest priority</button>
+        <button type="button" class="btn btn-primary" ng-click="orderMethod = 'newTodo'">Order alphabetically</button>
+    </div>
+    <br>
+    <table class="table table-bordered">
+        <tbody>
+            <tr ng-repeat="todo in todos | orderBy: orderMethod">
+                <td ng-class="{'danger':{{color}} === 3,'warning':{{color}} === 2,'success':{{color}}=== 1}">{{todo.newTodo}}</td>
+            </tr>
+        </tbody>
+    </table>
+</body>
+
+</html>
